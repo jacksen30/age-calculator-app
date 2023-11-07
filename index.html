@@ -15,24 +15,30 @@
   <title>Frontend Mentor | Age calculator app</title>
 </head>
 <body>
-  <main>
-    <div class="age-calculator">
+  <main class="main">
 
+    <div class="age-calculator flex">
+      <div class="age-calulator-inputs">
+        <div class="individual-input-wrapper">
+          <label>Day</label>
+          <input placeholder="DD"/>
+        </div>
+        <div class="individual-input-wrapper">
+          <label>Month</label>
+          <input placeholder="MM"/>
+        </div>
+        <div class="individual-input-wrapper">
+          <label>Year</label>
+          <input placeholder="YYYY"/>
+        </div>
+      </div>
 
+      <div class="age-calculator-outputs flex ">
+        <p>-- years</p>
+        <p>-- months</p>
+        <p>-- days</p>
+      </div>
     </div>
-    Day
-    DD
-
-    Month
-    MM
-
-    Year
-    YYYY
-
-    -- years
-    -- months
-    -- days
-
 
   </main>
 </body>

@@ -99,11 +99,41 @@ The element will be visually hidden but will still be read by screen reader tech
 
 body {
   font-family: 'Poppins', sans-serif;
+  background-color: var(--color1);
+  min-height: 100vh;
 }
 
 /* Divs, Containers & buttons - Reusable */
-.main {
+.flex {
+  display: flex;
   flex-direction: column;
 }
+
+.main {
+  display: flex;
+	align-items: center;
+	justify-content: center;
+  min-height: 100vh;
+}
+
+.age-calculator {
+  background-color: var(--color3);
+  padding: 20px;
+  height: 500px;
+  width: 500px;
+  border-radius: 3% 3% 30% 3%;
+}
+
+.age-calulator-inputs {
+  display: flex;
+  flex-direction: row;
+}
+
+.individual-input-wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 25%;
+}
+
 
 

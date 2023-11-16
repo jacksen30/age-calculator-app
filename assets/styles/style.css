@@ -99,7 +99,7 @@ The element will be visually hidden but will still be read by screen reader tech
 
 body {
   font-family: 'Poppins', sans-serif;
-  background-color: var(--color1);
+  background-color: var(--color4);
   min-height: 100vh;
 }
 
@@ -113,27 +113,105 @@ body {
   display: flex;
 	align-items: center;
 	justify-content: center;
-  min-height: 100vh;
+  min-height: 100vh; /* When this isint on the aligment is affected ? - NEEDS FIXING */
 }
 
 .age-calculator {
   background-color: var(--color3);
   padding: 20px;
-  height: 500px;
-  width: 500px;
+  width: 90%;
   border-radius: 3% 3% 30% 3%;
 }
 
 .age-calulator-inputs {
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
 }
 
 .individual-input-wrapper {
   display: flex;
   flex-direction: column;
-  width: 25%;
+  width: 30%;
 }
 
+.individual-input-wrapper label {
+  color: hsl(0, 1%, 44%);
+  font-weight: 700;
+}
 
+.individual-input-wrapper input {
+  margin: 5px 0;
+  padding: 5px;
+  font-size: 20px;
+  font-weight: 700;
+  /* width: 100%; */
+  border-radius: 7px;
+  border: 1px solid gray;
+}
 
+.error-text {
+  font-size: 9px;
+  font-weight: 700;
+  color: hsl(0, 100%, 67%);
+}
+
+.page-divider {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  height: 100px;
+  align-items: center;
+  justify-content: center;
+}
+
+hr {
+  width: 100%; /* Required inside flex-box or will shrink to no width */
+  /* background-color: black; */
+  /* height: 5px; */
+}
+
+.page-divider img {
+  position: absolute;
+  width: 65px;
+  color: var(--color1);
+  background-color: var(--color1);
+  border-radius: 100%;
+  padding: 16px;
+}
+
+.calc-output--text {
+  font-size: 46px;
+  font-weight: 700;
+}
+
+.calc-output--number {
+  color: var(--color1);
+}
+
+@media (min-width: 850px) {
+
+  .age-calculator {
+    max-width:600px;
+    padding: 40px;
+  }
+
+  .age-calulator-inputs {
+    width: 80%;
+  }
+
+  .error-text {
+    font-size: 10px;
+    /* font-weight: 700;
+    color: hsl(0, 100%, 67%); */
+  }
+
+  .page-divider img {
+    right: 0px;
+  }
+
+  .calc-output--text {
+    font-size: 60px;
+}
+
+}

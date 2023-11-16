@@ -22,24 +22,31 @@
         <div class="individual-input-wrapper">
           <label>Day</label>
           <input placeholder="DD"/>
+          <p class="error-text error-text--day">Must be a valid day</p>
         </div>
         <div class="individual-input-wrapper">
           <label>Month</label>
           <input placeholder="MM"/>
+          <p class="error-text error-text--month">Must be a valid month</p>
         </div>
         <div class="individual-input-wrapper">
           <label>Year</label>
           <input placeholder="YYYY"/>
+          <p class="error-text error-text--year">Must be in the past</p>
         </div>
       </div>
-
+      <div class="page-divider">
+        <img src="./assets/images/icon-arrow.svg" alt="">
+        <hr>
+      </div>
       <div class="age-calculator-outputs flex ">
-        <p>-- years</p>
-        <p>-- months</p>
-        <p>-- days</p>
+        <p class="calc-output--text"><span class="calc-output--number output--year">38</span> years</p>
+        <p class="calc-output--text"><span class="calc-output--number output--year">--</span> months</p>
+        <p class="calc-output--text"><span class="calc-output--number output--year">--</span> days</p>
       </div>
     </div>
 
   </main>
+  <script src="./script.js"></script>
 </body>
 </html>

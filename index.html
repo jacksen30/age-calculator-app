@@ -20,18 +20,18 @@
     <div class="age-calculator flex">
       <div class="age-calulator-inputs">
         <div class="individual-input-wrapper">
-          <label>Day</label>
-          <input placeholder="DD"/>
+          <label for="user-input--day">Day</label>
+          <input type="number" id="user-input--day" name="day" value="3" placeholder="DD" />
           <p class="error-text error-text--day">Must be a valid day</p>
         </div>
         <div class="individual-input-wrapper">
-          <label>Month</label>
-          <input placeholder="MM"/>
+          <label for="user-input--month">Month</label>
+          <input id="user-input--month" name="month" type="number" value="" placeholder="MM"/>
           <p class="error-text error-text--month">Must be a valid month</p>
         </div>
         <div class="individual-input-wrapper">
-          <label>Year</label>
-          <input placeholder="YYYY"/>
+          <label for="user-input--year">Year</label>
+          <input id="user-input--year" name="year" type="number" value="" placeholder="YYYY"/>
           <p class="error-text error-text--year">Must be in the past</p>
         </div>
       </div>

@@ -1,26 +1,20 @@
-// Get Today's (Current) Date, seperate it into day, month and year
+// Get Today's (Current) Date
 const currentDate = new Date();
+
+// Seperate Today's (Current) Date into day, month and year
 const currentDay = currentDate.getDate();
 const currentMonth = currentDate.getMonth() + 1;
 const currentYear = currentDate.getFullYear();
 
-console.log(currentDate);
-console.log(currentDay);
-console.log(currentMonth);
-console.log(currentYear);
+// Retrive the Parent DOM element of the user input fields
+const userInputs = document.getElementById('age-calulator-inputs');
+// Initialize an empty object to store the values of the user inputs.
+let userInputValues = {};
 
-const inputElement = {
-    day: document.getElementById('user-input--day'),
-    month: document.getElementById('user-input--month'),
-    year: document.getElementById('user-input--year')
-};
 
-const userInputValues = {
-    day: inputElement.day.value,
-    month: inputElement.month.value,
-    year: inputElement.year.value
-};
-
-// inputElement.day.addEventListener('input', () {
-//     // inputElement.day.value = 
-// })
+// Set up an event listener on the parent element of the user input fields
+userInputs.addEventListener('input', function(e) {
+    // Could add conditional statements here later if needed
+    userInputValues[e.target.id] = e.target.value;
+    console.log(userInputValues); /* For testing purposes */
+});

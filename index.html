@@ -18,10 +18,10 @@
   <main class="main">
 
     <div class="age-calculator flex">
-      <div class="age-calulator-inputs">
+      <div class="age-calulator-inputs" id="age-calulator-inputs">
         <div class="individual-input-wrapper">
           <label for="user-input--day">Day</label>
-          <input type="number" id="user-input--day" name="day" value="3" placeholder="DD" />
+          <input type="number" id="user-input--day" name="day" placeholder="DD" min="1" max="31" />
           <p class="error-text error-text--day">Must be a valid day</p>
         </div>
         <div class="individual-input-wrapper">

@@ -26,11 +26,32 @@ userInputs.addEventListener('input', function(e) {
     // Could add conditional statements here later if needed
     // Add / or update userInputValues obj to have a property name same as the id of the input with the user input for that field as the value
     userInputValues[e.target.id] = e.target.value;
-    /* Calculates and updates the outputYear with the new value, upon input */
+    // Calculates and updates the outputYear with the new value, upon input
     outputYear = (currentYear - userInputValues.userInputYear);
     // console.log(outputYear);
-    outputYears.textContent = outputYear; /* NEED TO FIX THIS LINE AS ENDING UP WITH NAN ERROR */
+    outputYears.textContent = outputYear;
 });
+
+// Below need to go into its own function - should only run once all input are available or validated ??
+
+// Adjust the age in years based on the months
+if (currentMonth < userInputValues.userInputMonth) {
+    // Subtract 1 from ageInYears output
+} else if (currentMonth === userInputValues.userInputMonth && currentDay < userInputValues.userInputDay) {
+    // Subtract 1 from ageInYears output
+}
+
+// Calculate age in months
+if (currentMonth >= userInputValues.userInputMonth) {
+    // ageInMonths = currentMonth - birthMonth
+} else {
+    // ageInMonths = 12 - (birthMonth - currentMonth)
+    if (currentDay < userInputValues.userInputDay) {
+        // Subtract 1 from ageInMonths
+    }
+}
+
+
 
 
 

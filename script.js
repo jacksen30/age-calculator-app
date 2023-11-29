@@ -16,40 +16,68 @@ const userInputs = document.getElementById('age-calulator-inputs');
 // Initialize an empty object to store the values of the user inputs.
 let userInputValues = {};
 
-/* CHANGE THESE VARIABLE NAMES AS THEY MAY GET CONFUSED WITH THE ABOVE DOM ELEMENT RETRIVAL WITH AN EXTRA 'S' */
-let outputDay;
-let outputMonth;
-let outputYear;
-
 // Set up an event listener on the parent element of the user input fields
 userInputs.addEventListener('input', function(e) {
     // Could add conditional statements here later if needed
     // Add / or update userInputValues obj to have a property name same as the id of the input with the user input for that field as the value
     userInputValues[e.target.id] = e.target.value;
+
+    // Convert year, month, and day values from the user input to integers
+    let inputYear = parseInt(userInputValues.userInputYear);
+    let inputMonth = parseInt(userInputValues.userInputMonth);
+    let inputDay = parseInt(userInputValues.userInputDay);
+
     // Calculates and updates the outputYear with the new value, upon input
-    outputYear = (currentYear - userInputValues.userInputYear);
-    // console.log(outputYear);
-    outputYears.textContent = outputYear;
+    let ageInYears = 0;
+    let ageInMonths = 0;
+    let ageInDays = 0;
+
+    // Set preliminary age in years - based off year only
+    ageInYears = (currentYear - inputYear);
+
+    // Adjust the age in years based on the months
+    if (currentMonth < inputMonth) {
+        ageInYears = ageInYears - 1;
+    }  else if (currentMonth === inputMonth && currentDay < inputDay) {
+        ageInYears = ageInYears - 1;
+    }
+
+    // Calculate the age in months
+    if (currentMonth >= inputMonth) {
+        ageInMonths = currentMonth - inputMonth;
+    } else {
+        ageInMonths = 12 - (inputMonth - currentMonth);
+        if (currentDay < inputDay) {
+            ageInMonths = ageInMonths - 1;
+        }
+    }
+
+    // Calculate age in days
+    const getDaysInMonth = (monthDigit) => {
+        if (monthDigit === 2) {
+            return 28;
+        } else if (monthDigit === 4 || monthDigit === 6 || monthDigit === 9 || monthDigit === 11) {
+            return 30;
+        } else {
+            return 31;
+        }
+    }
+
+    let daysInCurrentMonth = getDaysInMonth(currentMonth);
+
+    if (currentDay >= inputDay) {
+        ageInDays = currentDay - inputDay;
+    } else {
+        ageInDays = daysInCurrentMonth - (inputDay - currentDay) + (getDaysInMonth(currentMonth + 1));
+    }
+
+    outputYears.textContent = ageInYears;
+    outputMonths.textContent = ageInMonths;
+    outputDays.textContent = ageInDays;
 });
 
-// Below need to go into its own function - should only run once all input are available or validated ??
 
-// Adjust the age in years based on the months
-if (currentMonth < userInputValues.userInputMonth) {
-    // Subtract 1 from ageInYears output
-} else if (currentMonth === userInputValues.userInputMonth && currentDay < userInputValues.userInputDay) {
-    // Subtract 1 from ageInYears output
-}
 
-// Calculate age in months
-if (currentMonth >= userInputValues.userInputMonth) {
-    // ageInMonths = currentMonth - birthMonth
-} else {
-    // ageInMonths = 12 - (birthMonth - currentMonth)
-    if (currentDay < userInputValues.userInputDay) {
-        // Subtract 1 from ageInMonths
-    }
-}
 
 
 

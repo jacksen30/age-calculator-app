@@ -11,6 +11,11 @@ const outputYears = document.getElementById('outputYears');
 const outputMonths = document.getElementById('outputMonths');
 const outputDays = document.getElementById('outputDays');
 
+// Retrive the input error text elements where I will show error warning if validation for that input fails
+const dayError = document.getElementById('error-text--day');
+const monthError = document.getElementById('error-text--month');
+const yearError = document.getElementById('error-text--year');
+
 // Retrive the Parent DOM element of the user input fields
 const userInputs = document.getElementById('age-calulator-inputs');
 // Initialize an empty object to store the values of the user inputs.
@@ -35,45 +40,115 @@ userInputs.addEventListener('input', function(e) {
     // Set preliminary age in years - based off year only
     ageInYears = (currentYear - inputYear);
 
-    // Adjust the age in years based on the months
-    if (currentMonth < inputMonth) {
-        ageInYears = ageInYears - 1;
-    }  else if (currentMonth === inputMonth && currentDay < inputDay) {
-        ageInYears = ageInYears - 1;
-    }
+    const checkAllInputsValid = () => {
+        let aFieldHasFailed;
+        dayError.classList.remove('warning');
+        monthError.classList.remove('warning');
+        yearError.classList.remove('warning');
 
-    // Calculate the age in months
-    if (currentMonth >= inputMonth) {
-        ageInMonths = currentMonth - inputMonth;
-    } else {
-        ageInMonths = 12 - (inputMonth - currentMonth);
-        if (currentDay < inputDay) {
-            ageInMonths = ageInMonths - 1;
+        // if (isNaN(inputYear) || inputYear < 1900 || inputYear > currentYear + 1) {
+        //     aFieldHasFailed = true;
+        //     yearError.classList.add('warning');
+        //     // return false;
+        // }
+
+        // if (isNaN(inputMonth) || inputMonth < 1 || inputMonth > 12) {
+        //     aFieldHasFailed = true;
+        //     monthError.classList.add('warning');
+        //     // return false;
+        // }
+
+        // if (isNaN(inputDay) || inputDay < 1 || inputDay > 31) {
+        //     aFieldHasFailed = true;
+        //     dayError.classList.add('warning');
+        //     // return false;
+        // }
+        if (isNaN(inputYear) || inputYear < 1900 || inputYear > currentYear + 1) {
+            if (isNaN(inputYear)) {
+                aFieldHasFailed = true;
+            } else {
+            aFieldHasFailed = true;
+            yearError.classList.add('warning');
+            // return false;
+            }
         }
+
+        if (isNaN(inputMonth) || inputMonth < 1 || inputMonth > 12) {
+            if (isNaN(inputMonth)) {
+                aFieldHasFailed = true;
+            } else {
+                aFieldHasFailed = true;
+                monthError.classList.add('warning');
+            // return false;
+            }
+        }
+
+        if (isNaN(inputDay) || inputDay < 1 || inputDay > 31) {
+            if (isNaN(inputDay)) {
+                aFieldHasFailed = true;
+            } else {
+                aFieldHasFailed = true;
+                dayError.classList.add('warning');
+                // return false;
+            }
+        }
+
+        if (aFieldHasFailed) {
+            console.log('aFieldHasFailed evaluates to true !')
+            return false;
+        }
+
+        console.log('all inputs are currently valid and true');
+        return true;
     }
 
-    // Calculate age in days
-    const getDaysInMonth = (monthDigit) => {
-        if (monthDigit === 2) {
-            return 28;
-        } else if (monthDigit === 4 || monthDigit === 6 || monthDigit === 9 || monthDigit === 11) {
-            return 30;
+
+    // only output if all user input fields are valid ? need fixing
+    if (checkAllInputsValid() === true) {
+        // Adjust the age in years based on the months
+        if (currentMonth < inputMonth) {
+            ageInYears = ageInYears - 1;
+        }  else if (currentMonth === inputMonth && currentDay < inputDay) {
+            ageInYears = ageInYears - 1;
+        }
+
+        // Calculate the age in months
+        if (currentMonth >= inputMonth) {
+            ageInMonths = currentMonth - inputMonth;
         } else {
-            return 31;
+            ageInMonths = 12 - (inputMonth - currentMonth);
+            if (currentDay < inputDay) {
+                ageInMonths = ageInMonths - 1;
+            }
         }
-    }
 
-    let daysInCurrentMonth = getDaysInMonth(currentMonth);
+        // Calculate age in days
+        const getDaysInMonth = (monthDigit) => {
+            if (monthDigit === 2) {
+                return 28;
+            } else if (monthDigit === 4 || monthDigit === 6 || monthDigit === 9 || monthDigit === 11) {
+                return 30;
+            } else {
+                return 31;
+            }
+        }
 
-    if (currentDay >= inputDay) {
-        ageInDays = currentDay - inputDay;
+        let daysInCurrentMonth = getDaysInMonth(currentMonth);
+
+        if (currentDay >= inputDay) {
+            ageInDays = currentDay - inputDay;
+        } else {
+            ageInDays = daysInCurrentMonth - (inputDay - currentDay) + (getDaysInMonth(currentMonth + 1));
+        }
+
+        outputYears.textContent = ageInYears;
+        outputMonths.textContent = ageInMonths;
+        outputDays.textContent = ageInDays;
     } else {
-        ageInDays = daysInCurrentMonth - (inputDay - currentDay) + (getDaysInMonth(currentMonth + 1));
+        outputYears.textContent = '--';
+        outputMonths.textContent = '--';
+        outputDays.textContent = '--';
     }
-
-    outputYears.textContent = ageInYears;
-    outputMonths.textContent = ageInMonths;
-    outputDays.textContent = ageInDays;
 });
 
 

@@ -151,9 +151,14 @@ body {
 }
 
 .error-text {
+  display: none;
   font-size: 9px;
   font-weight: 700;
   color: hsl(0, 100%, 67%);
+}
+
+.error-text.warning {
+  display: block;
 }
 
 .page-divider {

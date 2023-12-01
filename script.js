@@ -18,21 +18,35 @@ const yearError = document.getElementById('error-text--year');
 
 // Retrive the Parent DOM element of the user input fields
 const userInputs = document.getElementById('age-calulator-inputs');
-// Initialize an empty object to store the values of the user inputs.
-let userInputValues = {};
+
+
+// Initial values set to 0 to avoid a NaN Error when using parseInt() later.
+let userInputValues = {
+    userInputYear: 0,
+    userInputMonth: 0,
+    userInputDay: 0,
+};
+
+//  Keeps track of if a user input field has recieved user input since last page load / refresh
+let userInputInteracted = {
+    userInputYear: false,
+    userInputMonth: false,
+    userInputDay: false,
+};
 
 // Set up an event listener on the parent element of the user input fields
 userInputs.addEventListener('input', function(e) {
-    // Could add conditional statements here later if needed
-    // Add / or update userInputValues obj to have a property name same as the id of the input with the user input for that field as the value
+    // Updates userInputValues
     userInputValues[e.target.id] = e.target.value;
+    // Updates userInputInteracted upon user input
+    userInputInteracted[e.target.id] = true;
 
-    // Convert year, month, and day values from the user input to integers
-    let inputYear = parseInt(userInputValues.userInputYear);
-    let inputMonth = parseInt(userInputValues.userInputMonth);
-    let inputDay = parseInt(userInputValues.userInputDay);
+    // Allows for shorter variable name when accessing compared to accessing inside the obj
+    let inputYear = userInputValues.userInputYear;
+    let inputMonth = userInputValues.userInputMonth;
+    let inputDay = userInputValues.userInputDay;
 
-    // Calculates and updates the outputYear with the new value, upon input
+    // Stores values need for Calculating Age
     let ageInYears = 0;
     let ageInMonths = 0;
     let ageInDays = 0;
@@ -40,71 +54,64 @@ userInputs.addEventListener('input', function(e) {
     // Set preliminary age in years - based off year only
     ageInYears = (currentYear - inputYear);
 
-    const checkAllInputsValid = () => {
-        let aFieldHasFailed;
+    const resetErrorWarnings = () => {
         dayError.classList.remove('warning');
         monthError.classList.remove('warning');
         yearError.classList.remove('warning');
+    }
 
-        // if (isNaN(inputYear) || inputYear < 1900 || inputYear > currentYear + 1) {
-        //     aFieldHasFailed = true;
-        //     yearError.classList.add('warning');
-        //     // return false;
-        // }
+    const resetOutputDisplay = () => {
+        outputYears.textContent = '--';
+        outputMonths.textContent = '--';
+        outputDays.textContent = '--';
+    }
 
-        // if (isNaN(inputMonth) || inputMonth < 1 || inputMonth > 12) {
-        //     aFieldHasFailed = true;
-        //     monthError.classList.add('warning');
-        //     // return false;
-        // }
+    const checkAllInputsValid = () => {
+        let aFieldHasFailed;
 
-        // if (isNaN(inputDay) || inputDay < 1 || inputDay > 31) {
-        //     aFieldHasFailed = true;
-        //     dayError.classList.add('warning');
-        //     // return false;
-        // }
-        if (isNaN(inputYear) || inputYear < 1900 || inputYear > currentYear + 1) {
-            if (isNaN(inputYear)) {
+        resetErrorWarnings();
+
+        if (inputYear < 1900 || inputYear > currentYear + 1) {
+            if (userInputInteracted.userInputYear) {
                 aFieldHasFailed = true;
+                yearError.classList.add('warning');
             } else {
-            aFieldHasFailed = true;
-            yearError.classList.add('warning');
-            // return false;
+                aFieldHasFailed = true;
             }
         }
 
-        if (isNaN(inputMonth) || inputMonth < 1 || inputMonth > 12) {
-            if (isNaN(inputMonth)) {
-                aFieldHasFailed = true;
-            } else {
+        if (inputMonth < 1 || inputMonth > 12) {
+            if (userInputInteracted.userInputMonth) {
                 aFieldHasFailed = true;
                 monthError.classList.add('warning');
-            // return false;
+            } else {
+                aFieldHasFailed = true;
             }
         }
 
-        if (isNaN(inputDay) || inputDay < 1 || inputDay > 31) {
-            if (isNaN(inputDay)) {
-                aFieldHasFailed = true;
-            } else {
+        if (inputDay < 1 || inputDay > 31) {
+            if (userInputInteracted.userInputDay) {
                 aFieldHasFailed = true;
                 dayError.classList.add('warning');
-                // return false;
+            } else {
+                aFieldHasFailed = true;
             }
         }
 
         if (aFieldHasFailed) {
-            console.log('aFieldHasFailed evaluates to true !')
+            resetOutputDisplay();
+            console.log('At least one user input value has failed validation!');
+            // This will break out of Function to ensure the below console.log and calculateOutput() isn't called when a user input has failed validation
             return false;
         }
 
-        console.log('all inputs are currently valid and true');
+        console.log('All user inputs have been validated');
+        calculateOutput();
         return true;
     }
 
 
-    // only output if all user input fields are valid ? need fixing
-    if (checkAllInputsValid() === true) {
+    const calculateOutput = () => {
         // Adjust the age in years based on the months
         if (currentMonth < inputMonth) {
             ageInYears = ageInYears - 1;
@@ -133,7 +140,7 @@ userInputs.addEventListener('input', function(e) {
             }
         }
 
-        let daysInCurrentMonth = getDaysInMonth(currentMonth);
+        const daysInCurrentMonth = getDaysInMonth(currentMonth);
 
         if (currentDay >= inputDay) {
             ageInDays = currentDay - inputDay;
@@ -144,14 +151,10 @@ userInputs.addEventListener('input', function(e) {
         outputYears.textContent = ageInYears;
         outputMonths.textContent = ageInMonths;
         outputDays.textContent = ageInDays;
-    } else {
-        outputYears.textContent = '--';
-        outputMonths.textContent = '--';
-        outputDays.textContent = '--';
     }
+
+    checkAllInputsValid();
 });
-
-
 
 
 

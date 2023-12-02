@@ -147,18 +147,24 @@ body {
   font-weight: 700;
   /* width: 100%; */
   border-radius: 7px;
-  border: 1px solid gray;
+  border: 2px solid gray;
+}
+
+/* On focus of individual input element */
+.individual-input-wrapper input:focus {
+  border: 2px solid var(--color1);
+  outline: none;
 }
 
 .error-text {
-  display: none;
+  visibility: hidden;
   font-size: 9px;
   font-weight: 700;
   color: hsl(0, 100%, 67%);
 }
 
 .error-text.warning {
-  display: block;
+  visibility: visible;
 }
 
 .page-divider {

@@ -87,8 +87,8 @@ The element will be visually hidden but will still be read by screen reader tech
 /* Reusable Custom CSS Variables */
 :root {
   /* RENAME THESE WITH MORE APPROPRIATE NAMES */
-  --color1: hsl(259, 100%, 65%);    /* Purple */
-  --color2: hsl(0, 100%, 67%);      /* Light red */
+  --main-color: hsl(259, 100%, 65%);    /* Purple */
+  --error-color: hsl(0, 100%, 67%);      /* Light red */
   --color3: hsl(0, 0%, 100%);       /* White */
   --color4: hsl(0, 0%, 94%);        /* Off white */
   --color5: hsl(0, 0%, 86%);        /* Light grey */
@@ -152,7 +152,7 @@ body {
 
 /* On focus of individual input element */
 .individual-input-wrapper input:focus {
-  border: 2px solid var(--color1);
+  border: 2px solid var(--main-color);
   outline: none;
 }
 
@@ -160,7 +160,7 @@ body {
   visibility: hidden;
   font-size: 9px;
   font-weight: 700;
-  color: hsl(0, 100%, 67%);
+  color: var(--error-color);
 }
 
 .error-text.warning {
@@ -185,8 +185,8 @@ hr {
 .page-divider img {
   position: absolute;
   width: 65px;
-  color: var(--color1);
-  background-color: var(--color1);
+  color: var(--main-color);
+  background-color: var(--main-color);
   border-radius: 100%;
   padding: 16px;
 }
@@ -197,7 +197,7 @@ hr {
 }
 
 .calc-output--number {
-  color: var(--color1);
+  color: var(--main-color);
 }
 
 @media (min-width: 850px) {

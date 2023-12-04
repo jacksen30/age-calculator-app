@@ -11,14 +11,8 @@ const outputYears = document.getElementById('outputYears');
 const outputMonths = document.getElementById('outputMonths');
 const outputDays = document.getElementById('outputDays');
 
-// Retrive the input error text elements where I will show error warning if validation for that input fails
-const dayError = document.getElementById('error-text--day');
-const monthError = document.getElementById('error-text--month');
-const yearError = document.getElementById('error-text--year');
-
 // Retrive the Parent DOM element of the user input fields
 const userInputs = document.getElementById('age-calulator-inputs');
-
 
 // Initial values set to 0 to avoid a NaN Error when using parseInt() later.
 let userInputValues = {
@@ -54,10 +48,26 @@ userInputs.addEventListener('input', function(e) {
     // Set preliminary age in years - based off year only
     ageInYears = (currentYear - inputYear);
 
+    const applyErrorStyles = (elementId, isError) => {
+        const inputElement = document.getElementById(elementId);
+        const labelElement = inputElement.previousElementSibling; // Assuming label is always before input
+        const errorMessageElement = inputElement.nextElementSibling; // Assuming error text / message is always after input
+
+        if (isError) {
+          labelElement.classList.add('warning');
+          inputElement.classList.add('warning');
+          errorMessageElement.classList.add('warning');
+        } else {
+          labelElement.classList.remove('warning');
+          inputElement.classList.remove('warning');
+          errorMessageElement.classList.remove('warning');
+        }
+      }
+
     const resetErrorWarnings = () => {
-        dayError.classList.remove('warning');
-        monthError.classList.remove('warning');
-        yearError.classList.remove('warning');
+        applyErrorStyles('userInputDay', false);
+        applyErrorStyles('userInputMonth', false);
+        applyErrorStyles('userInputYear', false);
     }
 
     const resetOutputDisplay = () => {
@@ -74,7 +84,7 @@ userInputs.addEventListener('input', function(e) {
         if (inputYear < 1900 || inputYear > currentYear + 1) {
             if (userInputInteracted.userInputYear) {
                 aFieldHasFailed = true;
-                yearError.classList.add('warning');
+                applyErrorStyles('userInputYear', true);
             } else {
                 aFieldHasFailed = true;
             }
@@ -83,7 +93,7 @@ userInputs.addEventListener('input', function(e) {
         if (inputMonth < 1 || inputMonth > 12) {
             if (userInputInteracted.userInputMonth) {
                 aFieldHasFailed = true;
-                monthError.classList.add('warning');
+                applyErrorStyles('userInputMonth', true);
             } else {
                 aFieldHasFailed = true;
             }
@@ -92,7 +102,7 @@ userInputs.addEventListener('input', function(e) {
         if (inputDay < 1 || inputDay > 31) {
             if (userInputInteracted.userInputDay) {
                 aFieldHasFailed = true;
-                dayError.classList.add('warning');
+                applyErrorStyles('userInputDay', true);
             } else {
                 aFieldHasFailed = true;
             }

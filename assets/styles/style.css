@@ -150,10 +150,19 @@ body {
   border: 2px solid gray;
 }
 
-/* On focus of individual input element */
-.individual-input-wrapper input:focus {
+/* On focus of individual input element - deliberatley less specific to make sure .warning can override :focus */
+input:focus {
   border: 2px solid var(--main-color);
   outline: none;
+}
+
+/* Error states for failed validation on input - label, iput and error message */
+.label.warning {
+  color: var(--error-color);
+}
+
+.input.warning {
+  border-color: var(--error-color);
 }
 
 .error-text {
@@ -167,6 +176,7 @@ body {
   visibility: visible;
 }
 
+
 .page-divider {
   display: flex;
   position: relative;
@@ -178,8 +188,6 @@ body {
 
 hr {
   width: 100%; /* Required inside flex-box or will shrink to no width */
-  /* background-color: black; */
-  /* height: 5px; */
 }
 
 .page-divider img {
@@ -224,5 +232,4 @@ hr {
   .calc-output--text {
     font-size: 60px;
 }
-
 }

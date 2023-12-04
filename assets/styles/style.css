@@ -86,21 +86,15 @@ The element will be visually hidden but will still be read by screen reader tech
 
 /* Reusable Custom CSS Variables */
 :root {
-  /* RENAME THESE WITH MORE APPROPRIATE NAMES */
-  --main-color: hsl(259, 100%, 65%);    /* Purple */
-  --error-color: hsl(0, 100%, 67%);      /* Light red */
-  --color3: hsl(0, 0%, 100%);       /* White */
-  --color4: hsl(0, 0%, 94%);        /* Off white */
-  --color5: hsl(0, 0%, 86%);        /* Light grey */
-  --color6: hsl(0, 1%, 44%);        /* Smokey grey */
-  --color7: hsl(0, 0%, 8%);         /* Off black */
+  --main-color: hsl(259, 100%, 65%);
+  --error-color: hsl(0, 100%, 67%);
+  --calculator-bg: hsl(0, 0%, 100%);
 }
 
 
 body {
   font-family: 'Poppins', sans-serif;
-  background-color: var(--color4);
-  min-height: 100vh;
+  background-color: hsl(0, 0%, 94%);
 }
 
 /* Divs, Containers & buttons - Reusable */
@@ -111,15 +105,15 @@ body {
 
 .main {
   display: flex;
-	align-items: center;
 	justify-content: center;
-  min-height: 100vh; /* When this isint on the aligment is affected ? - NEEDS FIXING */
 }
 
 .age-calculator {
-  background-color: var(--color3);
-  padding: 20px;
-  width: 90%;
+  margin-top: 70px;
+  background-color: var(--calculator-bg);
+  padding: 30px 20px;
+  width: 93%;
+  max-width:600px;
   border-radius: 3% 3% 30% 3%;
 }
 
@@ -133,21 +127,16 @@ body {
   display: flex;
   flex-direction: column;
   width: 30%;
-}
-
-.individual-input-wrapper label {
-  color: hsl(0, 1%, 44%);
   font-weight: 700;
+  color: hsl(0, 1%, 44%);
 }
 
 .individual-input-wrapper input {
   margin: 5px 0;
   padding: 5px;
   font-size: 20px;
-  font-weight: 700;
-  /* width: 100%; */
   border-radius: 7px;
-  border: 2px solid gray;
+  border: 2px solid hsl(0, 1%, 44%);
 }
 
 /* On focus of individual input element - deliberatley less specific to make sure .warning can override :focus */
@@ -175,7 +164,6 @@ input:focus {
 .error-text.warning {
   visibility: visible;
 }
-
 
 .page-divider {
   display: flex;
@@ -208,10 +196,9 @@ hr {
   color: var(--main-color);
 }
 
-@media (min-width: 850px) {
+@media (min-width: 750px) {
 
   .age-calculator {
-    max-width:600px;
     padding: 40px;
   }
 
@@ -221,8 +208,6 @@ hr {
 
   .error-text {
     font-size: 10px;
-    /* font-weight: 700;
-    color: hsl(0, 100%, 67%); */
   }
 
   .page-divider img {

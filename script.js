@@ -122,45 +122,47 @@ userInputs.addEventListener('input', function(e) {
 
 
     const calculateOutput = () => {
-        // Adjust the age in years based on the months
-        if (currentMonth < inputMonth) {
-            ageInYears = ageInYears - 1;
-        }  else if (currentMonth === inputMonth && currentDay < inputDay) {
-            ageInYears = ageInYears - 1;
+        // Adjust the age in years based on the months and days
+        ageInYears = currentYear - inputYear;
+
+        if (currentMonth < inputMonth || (currentMonth === inputMonth && currentDay < inputDay)) {
+            ageInYears -= 1;
         }
 
         // Calculate the age in months
-        if (currentMonth >= inputMonth) {
-            ageInMonths = currentMonth - inputMonth;
-        } else {
-            ageInMonths = 12 - (inputMonth - currentMonth);
-            if (currentDay < inputDay) {
-                ageInMonths = ageInMonths - 1;
-            }
+        ageInMonths = currentMonth - inputMonth;
+
+        if (currentDay < inputDay) {
+            ageInMonths -= 1;
+        }
+
+        if (ageInMonths < 0) {
+            ageInMonths += 12;
         }
 
         // Calculate age in days
-        const getDaysInMonth = (monthDigit) => {
-            if (monthDigit === 2) {
-                return 28;
-            } else if (monthDigit === 4 || monthDigit === 6 || monthDigit === 9 || monthDigit === 11) {
-                return 30;
-            } else {
-                return 31;
-            }
-        }
-
-        const daysInCurrentMonth = getDaysInMonth(currentMonth);
-
-        if (currentDay >= inputDay) {
-            ageInDays = currentDay - inputDay;
-        } else {
-            ageInDays = daysInCurrentMonth - (inputDay - currentDay) + (getDaysInMonth(currentMonth + 1));
+        let daysInPrevMonth = getDaysInMonth(inputMonth - 1 || 12, inputYear);
+        ageInDays = currentDay - inputDay;
+        if (ageInDays < 0) {
+            ageInDays += daysInPrevMonth;
         }
 
         outputYears.textContent = ageInYears;
         outputMonths.textContent = ageInMonths;
         outputDays.textContent = ageInDays;
+    }
+
+    // Updated getDaysInMonth function for Leap Year consideration
+    // If not used will create 1day inaccuracy for every leap year in that has occured in a persons life.
+    const getDaysInMonth = (month, year) => {
+        switch (month) {
+            case 2:
+                return (year % 4 === 0 && (year % 100 !== 0 || year % 400 === 0)) ? 29 : 28;
+            case 4: case 6: case 9: case 11:
+                return 30;
+            default:
+                return 31;
+        }
     }
 
     checkAllInputsValid();

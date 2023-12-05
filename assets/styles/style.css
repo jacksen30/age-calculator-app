@@ -198,7 +198,7 @@ hr {
 
 h1 {
   font-size: 0.75rem;
-  padding: 0.5rem 0;
+  padding: 0.25rem 0;
 }
 
 footer {
@@ -243,6 +243,6 @@ footer {
 
   footer {
     text-align: left;
-    padding: 0.5rem 0.5rem;
+    padding: 0.25rem 0.5rem;
   }
 }

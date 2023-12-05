@@ -108,12 +108,19 @@ body {
 	justify-content: center;
 }
 
+h1 {
+  font-size: 0.75rem;
+  position: absolute;
+  bottom: 0.5rem;
+  left: 0.5rem;
+}
+
 .age-calculator {
   margin-top: 70px;
   background-color: var(--calculator-bg);
   padding: 30px 20px;
   width: 93%;
-  max-width:600px;
+  max-width: 700px;
   border-radius: 3% 3% 30% 3%;
 }
 
@@ -156,7 +163,7 @@ input:focus {
 
 .error-text {
   visibility: hidden;
-  font-size: 9px;
+  font-size: 0.56rem;
   font-weight: 700;
   color: var(--error-color);
 }
@@ -188,7 +195,7 @@ hr {
 }
 
 .calc-output--text {
-  font-size: 46px;
+  font-size: 2.875rem;
   font-weight: 700;
 }
 
@@ -198,7 +205,13 @@ hr {
 
 @media (min-width: 750px) {
 
+  .main {
+    min-height: 100vh;
+    align-items: center;
+  }
+
   .age-calculator {
+    margin-top: 0px;
     padding: 40px;
   }
 
@@ -207,7 +220,11 @@ hr {
   }
 
   .error-text {
-    font-size: 10px;
+    font-size: 0.75rem;
+  }
+
+  .page-divider {
+    height: 80px;
   }
 
   .page-divider img {
@@ -215,6 +232,7 @@ hr {
   }
 
   .calc-output--text {
-    font-size: 60px;
+    font-size: 4.6875rem;
+    line-height: 1.2;
 }
 }
